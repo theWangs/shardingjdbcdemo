@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wang.shardingjdbcdemo.mapper.TestMapper">
+
+    <insert id="insertUser" parameterType="com.wang.shardingjdbcdemo.entity.User">
+        INSERT INTO `user` ( `user_id`, `user_name`, `user_age`, `update_time`, `create_time`, `house_id` )
+            VALUES
+                ( #{userId}, #{userName}, #{userAge}, #{updateTime}, #{createTime}, #{houseId} )
+    </insert>
+
+    <select id="queryUserList" parameterType="com.wang.shardingjdbcdemo.entity.User" resultType="com.wang.shardingjdbcdemo.entity.User">
+        SELECT * FROM `user`
+        <where>
+            <if test ='null != userId'>and user_id = #{userId}</if>
+            <if test ='null != userName and "" != userName '>and user_name = #{userName}</if>
+            <if test ='null != userAge'>and user_age = #{userAge}</if>
+            <if test ='null != houseId'>and house_id = #{houseId}</if>
+            <if test ='null != updateTime and "" != updateTime '>and update_time = #{updateTime}</if>
+            <if test ='null != createTime and "" != createTime '>and create_time = #{createTime}</if>
+        </where>
+    </select>
+
+    <select id="queryTestSubQuery" resultType="com.wang.shardingjdbcdemo.entity.UserDto">
+
+
+    </select>
+
+</mapper>
